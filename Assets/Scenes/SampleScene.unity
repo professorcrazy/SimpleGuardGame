@@ -3368,6 +3368,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   currentState: 0
+  playerTarget: {fileID: 0}
+  viewAngle: 55
+  visionRange: 25
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
