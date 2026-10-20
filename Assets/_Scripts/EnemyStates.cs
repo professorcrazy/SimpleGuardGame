@@ -96,7 +96,10 @@ public class EnemyStates : MonoBehaviour
 
         CurrentState.Enter();
     }
-
+    private void Update()
+    {
+        CurrentState?.Tick();
+    }
     public void SetCurrentTarget(Transform target)
     {
         CurrentTarget = target;

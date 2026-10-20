@@ -13,6 +13,7 @@ public class ChaseState : EnemyState
 
     public override void Tick()
     {
+
         if (enemy.CurrentTarget == null)
         {
             enemy.ChangeState(enemy.PatrolState);
