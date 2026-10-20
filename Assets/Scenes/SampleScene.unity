@@ -411,6 +411,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 194122840}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &243476440 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2253801649999680388, guid: e7a6d8627fe132a459e4324723643d62, type: 3}
+  m_PrefabInstance: {fileID: 7705132665569244943}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &250531747
 GameObject:
   m_ObjectHideFlags: 0
@@ -3249,19 +3254,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5731027472130940654, guid: e7a6d8627fe132a459e4324723643d62, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.00119026
       objectReference: {fileID: 0}
     - target: {fileID: 5731027472130940654, guid: e7a6d8627fe132a459e4324723643d62, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5731027472130940654, guid: e7a6d8627fe132a459e4324723643d62, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.99999934
       objectReference: {fileID: 0}
     - target: {fileID: 5731027472130940654, guid: e7a6d8627fe132a459e4324723643d62, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5731027472130940654, guid: e7a6d8627fe132a459e4324723643d62, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3269,7 +3274,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5731027472130940654, guid: e7a6d8627fe132a459e4324723643d62, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 179.864
       objectReference: {fileID: 0}
     - target: {fileID: 5731027472130940654, guid: e7a6d8627fe132a459e4324723643d62, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -3314,6 +3319,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4288693252149204061, guid: e7a6d8627fe132a459e4324723643d62, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7705132665569244951}
+    - targetCorrespondingSourceObject: {fileID: 4288693252149204061, guid: e7a6d8627fe132a459e4324723643d62, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7705132665569244956}
   m_SourcePrefab: {fileID: 100100000, guid: e7a6d8627fe132a459e4324723643d62, type: 3}
 --- !u!1 &7705132665569244944 stripped
 GameObject:
@@ -3332,7 +3340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d7f9f81f8cd36644bf12c2edfdce9fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  waypointGroup: {fileID: 367546167}
+  stoppingDistance: 0.5
 --- !u!195 &7705132665569244946
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3367,10 +3375,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 366543fbeb6d2634cb3bfda44f733098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  currentState: 0
-  playerTarget: {fileID: 0}
-  viewAngle: 55
+  guardMovement: {fileID: 0}
+  patrolRoute: {fileID: 0}
+  detectPlayer: {fileID: 0}
+  startInPatrol: 1
+  patrolSpeed: 2
+  chaseSpeed: 4
+  loseTargetDistance: 30
+  currentStateName: 
+--- !u!114 &7705132665569244956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7705132665569244944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7c1fd7e735df754aacedd65a2098488, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DetectPlayer
+  eyePoint: {fileID: 243476440}
   visionRange: 25
+  viewAngle: 55
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  maximumTargets: 20
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

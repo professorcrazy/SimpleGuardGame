@@ -1,45 +1,84 @@
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class GuardMovement : MonoBehaviour
 {
-    [SerializeField] private Transform waypointGroup;
-    private List<Transform> waypoints = new List<Transform>();
-    private NavMeshAgent agent;
-    private Vector3 targetPos = Vector3.zero;
+    [Header("Movement")]
+    [SerializeField] private float stoppingDistance = 0.5f;
 
-    public void SetTargetPosition(Vector3 position)
+    private NavMeshAgent agent;
+    public bool IsOnNavMesh => agent != null && agent.isOnNavMesh;
+
+    public bool HasReachedTarget
     {
-        targetPos = position;
+        get
+        {
+            if (!IsOnNavMesh)
+            {
+                return false;
+            }
+
+            return !agent.pathPending &&
+                   agent.remainingDistance <= stoppingDistance;
+        }
     }
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-        if (waypointGroup != null)
-        {
-            foreach (Transform child in waypointGroup)//.GetComponentInChildren<Transform>()
-            {
-                waypoints.Add(child);
-            }
-        }
         agent = GetComponent<NavMeshAgent>();
-        SetTargetPosition(waypoints[0].position);
-
+        agent.stoppingDistance = stoppingDistance;
     }
-    public void NextWaypoint()
+    public void MoveTo(Vector3 position)
     {
-        if (agent.remainingDistance < 0.1f)
-            SetTargetPosition(waypoints[Random.Range(0, waypoints.Count)].position);
+        if (!IsOnNavMesh)
+        {
+            return;
+        }
+
+        agent.isStopped = false;
+        agent.SetDestination(position);
     }
 
-    // FixedUpdate is called every physics update
-    void FixedUpdate()
+    public void StopMoving()
     {
-        agent.SetDestination(targetPos);
-        
+        if (!IsOnNavMesh)
+        {
+            return;
+        }
+
+        agent.isStopped = true;
+        agent.ResetPath(); //check if this is needed or might mess up ContinueMoving()
+    }
+
+    public void ContinueMoving()
+    {
+        if (!IsOnNavMesh)
+        {
+            return;
+        }
+        agent.isStopped = false;
+    }
+
+    public void SetSpeed(float speed)
+    {
+        if (agent == null)
+        {
+            return;
+        }
+
+        agent.speed = speed;
+    }
+
+    public Vector3 GetVelocity()
+    {
+        if (agent == null)
+        {
+            return Vector3.zero;
+        }
+
+        return agent.velocity;
     }
 }

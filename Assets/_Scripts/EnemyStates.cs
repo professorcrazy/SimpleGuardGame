@@ -48,8 +48,11 @@ public class EnemyStates : MonoBehaviour
         {
             ChangeState(PatrolState);
         }
+        else
+        {
+            ChangeState(ChaseState);
+        }
     }
-
     void LookForMissingReferences()
     {
         if (guardMovement == null)
