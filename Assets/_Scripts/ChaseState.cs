@@ -33,6 +33,6 @@ public class ChaseState : EnemyState
             return;
         }
 
-        enemy.Movement.MoveTo(enemy.CurrentTarget.position);
+        enemy.Movement.MoveTo(enemy.LastKnownTargetPosition);
     }
 }

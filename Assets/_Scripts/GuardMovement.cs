@@ -4,6 +4,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class GuardMovement : MonoBehaviour
 {
+
     [Header("Movement")]
     [SerializeField] private float stoppingDistance = 0.5f;
 
