@@ -6,7 +6,9 @@ public class PatrolRoute : MonoBehaviour
     [Header("Waypoints")]
     [SerializeField] private Transform waypointGroup;
 
-    private readonly List<Transform> waypoints = new List<Transform>();
+    private readonly List<Transform> waypoints =
+        new List<Transform>();
+
     private int currentWaypointIndex;
 
     public bool HasWaypoints => waypoints.Count > 0;
@@ -41,7 +43,8 @@ public class PatrolRoute : MonoBehaviour
 
         foreach (Transform child in waypointGroup)
         {
-            waypoints.Add(child);
+            if (child != null)
+                waypoints.Add(child);
         }
 
         if (waypoints.Count == 0)
@@ -50,6 +53,11 @@ public class PatrolRoute : MonoBehaviour
                 $"{name}'s Waypoint Group har ingen børn.",
                 this);
         }
+    }
+
+    public void ResetRoute()
+    {
+        currentWaypointIndex = 0;
     }
 
     public void GoToNextWaypoint()
@@ -61,11 +69,6 @@ public class PatrolRoute : MonoBehaviour
 
         if (currentWaypointIndex >= waypoints.Count)
             currentWaypointIndex = 0;
-    }
-
-    public void ResetRoute()
-    {
-        currentWaypointIndex = 0;
     }
 
     private void OnDrawGizmosSelected()
@@ -87,5 +90,4 @@ public class PatrolRoute : MonoBehaviour
             }
         }
     }
-
 }

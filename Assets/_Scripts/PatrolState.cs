@@ -23,14 +23,17 @@ public class PatrolState : EnemyState
 
     public override void Tick()
     {
-        Transform visiblePlayer =
-            enemy.DetectPlayer.GetBestVisiblePlayer();
-
-        if (visiblePlayer != null)
+        if (enemy.CurrentTarget == null)
         {
-            enemy.SetCurrentTarget(visiblePlayer);
-            enemy.ChangeState(enemy.ChaseState);
-            return;
+            Transform visiblePlayer =
+                enemy.DetectPlayer.GetBestVisiblePlayer();
+
+            if (visiblePlayer != null)
+            {
+                enemy.SetCurrentTarget(visiblePlayer);
+                enemy.ChangeState(enemy.ChaseState);
+                return;
+            }
         }
 
         if (enemy.PatrolRoute == null ||
@@ -51,8 +54,6 @@ public class PatrolState : EnemyState
         Transform waypoint = enemy.PatrolRoute.CurrentWaypoint;
 
         if (waypoint != null)
-        {
             enemy.Movement.MoveTo(waypoint.position);
-        }
     }
 }
